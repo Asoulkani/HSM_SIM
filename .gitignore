@@ -1,0 +1,60 @@
+# .gitignore
+
+# Ignore IntelliJ IDEA specific files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Ignore Maven target directory
+*/target/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore Java specific files
+*.class
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Ignore compiled files and bytecode
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Ignore Java package files
+*.jsp
+*.jspx
+*.pom
+*.metadata
+*.MF
+*.SF
+*.rsa
+*.inf
+*.mark
+
+# Ignore other files
+*.properties
+*.json
+*.yml
+*.lock
+*.bak
+*.so
+*.dll
+*.dylib
+*.bin
+*.sh
+*.bat
+*.cmd
