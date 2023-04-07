@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.kafka.core.KafkaTemplate;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"ma.soultech" })
+@ComponentScan(basePackages = {"ma.soultech"})
 public class HsmSimCommandApplication {
 
 	public static void main(String[] args) {

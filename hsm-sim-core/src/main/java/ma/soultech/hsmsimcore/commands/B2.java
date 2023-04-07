@@ -12,7 +12,6 @@ import java.util.Map;
 public class B2 extends Command{
 
     public B2() {
-        System.out.println("I have been Created my class name is : " + this.getClass().getName());
     }
 
     @Override
