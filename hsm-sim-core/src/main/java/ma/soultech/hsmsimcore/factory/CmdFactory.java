@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CmdFactory {
     public CmdFactory() {
-        System.out.println("Factory scanned");
+
     }
 
     @Autowired
