@@ -1,0 +1,7 @@
+version: '3'
+services:
+  hsm-sim-tcpserver:
+    image: 'hsm-sim-tcpserver'
+    ports:
+      - "1500:1500"
+    restart: always

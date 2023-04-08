@@ -46,9 +46,7 @@ Thumbs.db
 *.mark
 
 # Ignore other files
-*.properties
 *.json
-*.yml
 *.lock
 *.bak
 *.so
