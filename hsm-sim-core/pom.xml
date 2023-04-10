@@ -55,6 +55,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+						<classifier>exec</classifier> <!-- in spring boot class files are put into BOOT-INF/classes, so it can not be used as a dependency in other modules-->
 				</configuration>
 			</plugin>
 		</plugins>
