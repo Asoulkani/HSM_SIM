@@ -2,5 +2,10 @@ version: '3'
 services:
   hsm-sim-command:
     image: 'hsm-sim-command'
-
-    restart: always
+    networks:
+      - hsm-sim-parent_default
+    environment:
+      DOCKER_IP_PORT: "kafka:9092"
+networks:
+  hsm-sim-parent_default:
+    external: true

@@ -5,3 +5,9 @@ services:
     ports:
       - "1500:1500"
     restart: always
+    networks:
+      - hsm-sim-parent_default
+
+networks:
+  hsm-sim-parent_default:
+    external: true

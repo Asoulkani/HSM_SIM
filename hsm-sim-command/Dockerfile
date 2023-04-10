@@ -12,6 +12,8 @@ WORKDIR /app/hsm-sim-core
 RUN mvn dependency:go-offline
 RUN mvn install
 
+ENV DOCKER_IP_PORT=kafka:9092
+
 WORKDIR /app
 COPY ./hsm-sim-command/pom.xml .
 RUN mvn dependency:go-offline
@@ -25,7 +27,7 @@ WORKDIR /app
 COPY --from=build /app/target/hsm-sim-command-0.0.1-SNAPSHOT.jar app.jar
 
 # Set environment variables
-ENV JAVA_OPTS=""
+
 
 # Expose port 1500 for the application
 EXPOSE 1500
