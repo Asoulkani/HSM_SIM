@@ -28,6 +28,7 @@ public class CommandServices {
     public void executeReceivedCommand(String key, byte[] cmd){
         String command = HsmDataConverter.printCommandFromByte(cmd);
         logger.info("Received Command : {}" ,command);
+        command = command.substring(4);
         Command receivedCommand = cmdFactory.getCmd(command.substring(0,2));
         logger.info("Command : {}", receivedCommand.getDescription());
         byte[] response = receivedCommand.execute(command.substring(2)).getBytes(StandardCharsets.UTF_8);

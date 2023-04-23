@@ -21,7 +21,7 @@ public class TcpConfig {
 
     @Bean
     public AbstractServerConnectionFactory tcpServer() {
-        log.info("Starting hsm echo server with port: {}", port);
+        log.info("Starting HSM SIM TCP server with port: {}", port);
         TcpNetServerConnectionFactory serverCf = new TcpNetServerConnectionFactory(port);
         ByteArrayLengthHeaderSerializer serializer = new ByteArrayLengthHeaderSerializer(2);
         ByteArrayLengthHeaderSerializer deSerializer = new ByteArrayLengthHeaderSerializer(2);
