@@ -20,22 +20,34 @@ import java.util.Map;
 public class KafkaConsumerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
-    public Map<String,Object> consumerConfig(){
-        Map<String,Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
-        return props;
+
+    @Value("${kafka.consumer.group-id}")
+    private String groupId;
+    @Bean
+    public ConsumerFactory<String, byte[]> consumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(
+                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                bootstrapServers);
+        props.put(
+                ConsumerConfig.GROUP_ID_CONFIG,
+                groupId);
+        props.put(
+                ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
+                StringDeserializer.class);
+        props.put(
+                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
+                ByteArrayDeserializer.class);
+        return new DefaultKafkaConsumerFactory<>(props);
     }
 
     @Bean
-    public ConsumerFactory<String, byte[]> consumerFactory(){
-        return new DefaultKafkaConsumerFactory<>(consumerConfig(),new StringDeserializer(), new ByteArrayDeserializer());
-    }
+    public ConcurrentKafkaListenerContainerFactory<String, byte[]>
+    kafkaListenerContainerFactory() {
 
-    KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,byte[]>> listenerFactory(ConsumerFactory<String, byte[]> consumerFactory){
-        ConcurrentKafkaListenerContainerFactory<String,byte[]> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory);
+        ConcurrentKafkaListenerContainerFactory<String, byte[]> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 }

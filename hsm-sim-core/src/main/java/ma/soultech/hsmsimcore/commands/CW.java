@@ -1,6 +1,7 @@
 package ma.soultech.hsmsimcore.commands;
 
 import ma.soultech.hsmsimcore.algo.cvv.Cvv;
+import ma.soultech.hsmsimcore.factory.CmdUtils;
 import ma.soultech.hsmsimcore.factory.FieldDescription;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +18,7 @@ public class CW extends Command {
     @Override
     public String execute(String cmd) {
         LinkedHashMap<String, String> values = parser(cmd);
+        CmdUtils.printCmdListFields(values, "CW");
         String generatedCvv;
         try {
             generatedCvv = cvv.cvvGeneration(values.get("PAN"), values.get("Expiration date"), values.get("Service code"), values.get("CVK A/B"));
