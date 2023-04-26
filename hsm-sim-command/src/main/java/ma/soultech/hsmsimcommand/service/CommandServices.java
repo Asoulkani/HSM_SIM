@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 @Service
 public class CommandServices {
@@ -28,11 +29,14 @@ public class CommandServices {
     public void executeReceivedCommand(String key, byte[] cmd){
         String command = HsmDataConverter.printCommandFromByte(cmd);
         logger.info("Received Command : {}" ,command);
+        byte[] header = command.substring(0, 4).getBytes(StandardCharsets.UTF_8);
         command = command.substring(4);
         Command receivedCommand = cmdFactory.getCmd(command.substring(0,2));
         logger.info("Command : {}", receivedCommand.getDescription());
         byte[] response = receivedCommand.execute(command.substring(2)).getBytes(StandardCharsets.UTF_8);
-        logger.info("Responce : {}", HsmDataConverter.printCommandFromByte(response));
-        kafkaResponseProducer.sendResponse(key, response);
+        byte[] responseWithHeader = Arrays.copyOf(header, header.length + response.length);
+        System.arraycopy(response, 0, responseWithHeader, header.length, response.length);
+        logger.info("Response : {}", HsmDataConverter.printCommandFromByte(responseWithHeader));
+        kafkaResponseProducer.sendResponse(key, responseWithHeader);
     }
 }

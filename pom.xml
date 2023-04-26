@@ -16,6 +16,7 @@
     <module>hsm-sim-dataConverter</module>
     <module>hsm-sim-command</module>
     <module>hsm-sim-TcpServer</module>
+    <module>hsm-sim-tester</module>
   </modules>
   <dependencies>
     <dependency>
