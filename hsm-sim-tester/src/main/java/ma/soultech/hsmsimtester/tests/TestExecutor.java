@@ -14,17 +14,23 @@ public class TestExecutor implements ApplicationRunner {
     Performance performance;
     @Autowired
     Commands commands;
+    @Autowired
+    Scenarios scenarios;
 
     private final Logger logger = LoggerFactory.getLogger(TestExecutor.class);
 
     private int nbrTest = 0;
     private int nbrTestOk = 0;
+    private int nbrScn = 0;
+    private int nbrScnOk = 0;
     @Override
     public void run(ApplicationArguments args) throws Exception {
         logger.info("Tests Started");
-        performanceTests();
+        //performanceTests();
         commandsTests();
+        scenariosTests();
         logger.info("{} executed Tests | OK : {} | NOK : {}",nbrTest, nbrTestOk, nbrTest - nbrTestOk);
+        logger.info("{} executed Scenarios | OK : {} | NOK : {}",nbrScn, nbrScnOk, nbrScn - nbrScnOk);
     }
 
     public void performanceTests()
@@ -60,6 +66,14 @@ public class TestExecutor implements ApplicationRunner {
         } else {
             logger.warn("Test failed: B2_OK");
         }
+    }
+
+    public void scenariosTests(){
+        nbrScn += 1;
+        if(scenarios.scnCvvGenVerify())
+            nbrScnOk++;
+        else
+            logger.warn("Scenario failed: scnCvvGenVerify");
     }
 
 }

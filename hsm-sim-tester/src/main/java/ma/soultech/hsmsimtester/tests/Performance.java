@@ -1,11 +1,9 @@
 package ma.soultech.hsmsimtester.tests;
 
-import ma.soultech.hsmsimtester.HsmSimTesterApplication;
 import ma.soultech.hsmsimtester.services.TcpClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
